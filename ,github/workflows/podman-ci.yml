@@ -1,0 +1,27 @@
+name: Podman Orchestration CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Podman
+      run: sudo apt-get update && sudo apt-get install -y podman
+
+    - name: Run Python Orchestrator
+      run: python3 orchestrator.py
+
+    - name: Test all services
+      run: |
+        sleep 5
+        curl -X POST http://localhost:5001/add -H "Content-Type: application/json" -d '{"a":10,"b":5}'
+        curl -X POST http://localhost:5002/sub -H "Content-Type: application/json" -d '{"a":10,"b":5}'
+        curl -X POST http://localhost:5003/mul -H "Content-Type: application/json" -d '{"a":10,"b":5}'
+        curl -X POST http://localhost:5004/div -H "Content-Type: application/json" -d '{"a":10,"b":5}'
