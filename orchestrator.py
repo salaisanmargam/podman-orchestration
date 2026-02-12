@@ -29,4 +29,4 @@ for name, port in services:
         f"-p {port}:5000 calc-{name}"
     )
 
-print("✅ All 4 services orchestrated successfully")
+print("✅ All 4 services orchestrated successfully without error")
