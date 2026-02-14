@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arithmetic-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: arithmetic-service
+  template:
+    metadata:
+      labels:
+        app: arithmetic-service
+    spec:
+      containers:
+      - name: arithmetic-service
+        image: localhost/div-service:latest   # your podman image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
