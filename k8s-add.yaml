@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: add-container
-        image: localhost/add-service:latest
+        image: add-service:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
